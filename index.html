@@ -92,7 +92,9 @@
     .nav {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
+      justify-content: flex-end;
     }
 
     .nav a {
@@ -510,6 +512,136 @@
       font-size: 14px;
     }
 
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      display: flex;
+      min-height: 260px;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 248, 253, 0.78)),
+        var(--surface);
+    }
+
+    .project-meta {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 30px;
+      align-items: center;
+      border: 1px solid rgba(117, 105, 223, 0.18);
+      border-radius: 8px;
+      padding: 0 10px;
+      background: rgba(117, 105, 223, 0.07);
+      color: #4d45a8;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .project-card h3 {
+      margin: 18px 0 10px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .project-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .project-tags span {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 5px 8px;
+      background: #ffffff;
+      color: #50607a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .project-link,
+    .contact-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .project-link {
+      width: 100%;
+      margin-top: 24px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #ffffff;
+    }
+
+    .project-link:hover,
+    .project-link:focus-visible {
+      background: #374467;
+      outline: none;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      background: rgba(251, 253, 255, 0.82);
+    }
+
+    .contact-card b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .contact-card p {
+      min-height: 44px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-link {
+      width: 100%;
+      border: 1px solid rgba(57, 169, 238, 0.36);
+      background: rgba(57, 169, 238, 0.10);
+      color: #174b73;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      border-color: var(--sky);
+      background: rgba(57, 169, 238, 0.16);
+      outline: none;
+    }
+
     .footer {
       display: flex;
       justify-content: center;
@@ -535,6 +667,11 @@
       .info-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .project-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
@@ -552,11 +689,11 @@
 
       .nav {
         width: 100%;
-        justify-content: space-between;
+        justify-content: flex-start;
       }
 
       .nav a {
-        flex: 1;
+        flex: 1 1 calc(33.333% - 8px);
         justify-content: center;
         padding: 0 8px;
       }
@@ -601,6 +738,15 @@
         grid-template-columns: 1fr;
       }
 
+      .project-card {
+        min-height: auto;
+        padding: 20px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
       .chat-form {
         grid-template-columns: 1fr;
         padding: 16px;
@@ -631,6 +777,8 @@
         <a href="#about">关于</a>
         <a href="#chat">分身</a>
         <a href="#info">信息</a>
+        <a href="works.html">作品</a>
+        <a href="#contact">联系</a>
       </nav>
     </header>
 
@@ -693,7 +841,7 @@
     <section id="info" class="info-section" aria-label="个人信息展示区">
       <div class="section-heading">
         <h2>个人信息</h2>
-        <p>第一版先保留轻量信息，方便后续扩展项目、博客和联系方式。</p>
+        <p>我还是很无聊的 >_< </p>
       </div>
 
       <div class="info-grid">
@@ -712,6 +860,33 @@
         <article class="info-card">
           <b>记忆点</b>
           <p>喜欢自言自语，脑子里总有奇奇怪怪的新想法。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="info-section" aria-label="个人联系区域">
+      <div class="section-heading">
+        <h2>联系 YQ</h2>
+        <p>打扰我的方式。</p>
+      </div>
+
+      <div class="contact-grid">
+        <article class="contact-card">
+          <b>邮箱</b>
+          <p>9592099@qq.com</p>
+          <!-- <a class="contact-link" href="#contact">待补充邮箱</a> -->
+        </article>
+
+        <article class="contact-card">
+          <b>GitHub</b>
+          <p>适合放作品仓库和学习记录，目前还没有填写主页地址。</p>
+          <a class="contact-link" href="https://github.com/" target="_blank" rel="noreferrer">前往 GitHub</a>
+        </article>
+
+        <article class="contact-card">
+          <b>直接询问</b>
+          <p>询问数字分身。</p>
+          <a class="contact-link" href="#chat">问数字分身</a>
         </article>
       </div>
     </section>
@@ -809,12 +984,15 @@
 
     navLinks.forEach((link) => {
       link.addEventListener("click", (event) => {
-        const target = document.querySelector(link.getAttribute("href"));
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+
+        const target = document.querySelector(href);
         if (!target) return;
 
         event.preventDefault();
         target.scrollIntoView({ behavior: "smooth", block: "start" });
-        history.pushState(null, "", link.getAttribute("href"));
+        history.pushState(null, "", href);
 
         target.classList.remove("nav-target-flash");
         window.setTimeout(() => target.classList.add("nav-target-flash"), 20);
