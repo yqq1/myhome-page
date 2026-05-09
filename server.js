@@ -113,6 +113,35 @@ async function handleChat(request, response) {
     return;
   }
 
+  const lastUserContent = messages[messages.length - 1].content.trim();
+
+  // 🔴 策略 1：指令拦截，实现 0 Token 消耗
+  if (lastUserContent === "/") {
+    sendJson(response, 200, {
+      reply: "我现在支持以下指令哦：\n\n1️⃣ `/猜英雄` - 跟我玩《王者荣耀》猜英雄游戏！\n2️⃣ `/` - 查看指令菜单\n\n你可以直接输入指令试试看~"
+    });
+    return; // 直接返回，不再请求 DeepSeek
+  }
+
+  // 🔴 策略 2：动态系统提示词（检测到最近在玩游戏才加载规则）
+  const isPlayingHeroGame = messages.some(msg => msg.content.includes("/猜英雄"));
+  let currentSystemPrompt = personaPrompt;
+
+  if (isPlayingHeroGame) {
+    currentSystemPrompt += `
+\n\n【特殊指令模式：/猜英雄】
+当前你正在和用户玩《王者荣耀》猜英雄游戏。
+规则如下：
+1. 你已经在心里随机挑选了一个《王者荣耀》的英雄角色（不要说出来）。
+2. 用户会通过提问来猜测（比如：是男的吗？是法师吗？台词是什么？）。
+3. 你必须根据设定的英雄真实回答用户的提问，每次回答只回答当前问题。
+4. 绝对不能直接说出该英雄的名字，直到用户明确猜中！
+5. 如果用户刚输入 /猜英雄，你就回复：“我已经想好了一个王者荣耀的英雄，你可以开始问我问题啦（比如问我性别、职业或台词）！
+6.不要瞎编角色，一定要从《王者荣耀》这个游戏里面挑选英雄
+”
+`;
+  }
+
   try {
     const upstream = await fetch(deepseekUrl, {
       method: "POST",
@@ -123,7 +152,7 @@ async function handleChat(request, response) {
       body: JSON.stringify({
         model: process.env.DEEPSEEK_MODEL || "deepseek-v4-flash",
         messages: [
-          { role: "system", content: personaPrompt },
+          { role: "system", content: currentSystemPrompt },
           ...messages
         ],
         thinking: { type: "disabled" },
