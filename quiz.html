@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YQ | Quiz Practice</title>
+  <link rel="stylesheet" href="assets/quiz.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar" aria-label="刷题页面导航">
+      <a class="brand" href="index.html" aria-label="返回主页">
+        <span class="brand-mark">YQ</span>
+        <span>YQ's Quiz</span>
+      </a>
+      <nav class="nav" aria-label="刷题页主导航">
+        <a href="index.html">主页</a>
+        <a href="works.html">作品</a>
+        <a class="active" href="quiz.html">刷题</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="刷题页介绍">
+      <div class="hero-content">
+        <span class="eyebrow">Quiz / Practice</span>
+        <h1>本地题库刷题页</h1>
+        <p class="lead">选择题库后即可逐题练习。当前支持单选题、多选题、判断题和简答题，提交后会立即判题并展示标准答案。</p>
+      </div>
+    </section>
+
+    <section class="layout" aria-label="刷题主内容">
+      <section class="panel" aria-labelledby="set-list-title">
+        <div class="panel-heading">
+          <div>
+            <h2 id="set-list-title">题库列表</h2>
+            <p>支持多个本地 CSV 题库切换。</p>
+          </div>
+        </div>
+        <div id="set-list" class="set-list"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="quiz-title">
+        <div class="panel-heading">
+          <div>
+            <h2 id="quiz-title">答题区</h2>
+            <p id="quiz-subtitle">先从左侧选择一个题库开始。</p>
+          </div>
+        </div>
+        <div id="mode-switch" class="mode-switch" aria-label="出题模式">
+          <button class="mode-button active" type="button" data-mode="ordered">顺序出题</button>
+          <button class="mode-button" type="button" data-mode="random">随机出题</button>
+        </div>
+        <div id="quiz-root" class="question-shell">
+          <div class="empty-state">
+            <p class="helper">题库载入后，这里会显示进度、题目内容、判题结果和最终得分。</p>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <span>YQ personal homepage prototype · quiz practice</span>
+    </footer>
+  </main>
+
+  <script type="module" src="assets/quiz.js"></script>
+</body>
+</html>

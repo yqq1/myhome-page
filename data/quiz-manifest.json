@@ -1,0 +1,26 @@
+[
+  {
+    "id": "java-basics",
+    "title": "Java 基础练习",
+    "description": "覆盖语法、集合、判断和常见概念。",
+    "badge": "基础题库",
+    "file": "data/java-basics.csv",
+    "questionCount": 5
+  },
+  {
+    "id": "web-basics",
+    "title": "Web 基础练习",
+    "description": "覆盖 HTML、CSS、JavaScript 和基础判断。",
+    "badge": "前端题库",
+    "file": "data/web-basics.csv",
+    "questionCount": 5
+  },
+  {
+    "id": "English",
+    "title": "英语翻译",
+    "description": "10个翻译句子",
+    "badge": "基础题库",
+    "file": "data/English.csv",
+    "questionCount": 10
+  }
+]

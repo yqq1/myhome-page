@@ -1,0 +1,6 @@
+id,set,title,type,options,answer
+1,web-basics,下面哪个标签通常用于页面中的一级标题？,single,A.<p>|B.<h1>|C.<span>|D.<section>,B
+2,web-basics,下面哪些属于常见的 CSS 布局方式？,multiple,A.Flex|B.Grid|C.Float|D.Promise,"A,B,C"
+3,web-basics,JavaScript 可以直接操作 DOM。,judge,对|错,对
+4,web-basics,浏览器读取 CSS 文件时通常会按从上到下的顺序解析规则。,judge,对|错,对
+5,web-basics,用于给页面添加交互逻辑的脚本语言是？,short,,JavaScript
