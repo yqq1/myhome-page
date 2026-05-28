@@ -1,6 +1,0 @@
-id,set,title,type,options,answer
-1,java-basics,下面哪个关键字用于定义类成员常量？,single,A.var|B.final|C.static|D.extends,B
-2,java-basics,下面哪些属于 Java 集合框架中的常见接口？,multiple,A.List|B.Map|C.Set|D.Switch,"A,B,C"
-3,java-basics,Java 中 String 是引用类型。,judge,对|错,对
-4,java-basics,ArrayList 的底层主要基于动态数组实现。,judge,对|错,对
-5,java-basics,Java 中用于创建对象的关键字是？,short,,new

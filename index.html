@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YQ | Digital Home</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260528" />
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("yq-theme");
+        const theme = savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {}
+    })();
+  </script>
   <style>
     :root {
       --bg: #f6f9ff;
@@ -765,6 +776,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="assets/theme.css" />
 </head>
 <body>
   <main class="page">
@@ -780,6 +792,7 @@
         <a href="works.html">作品</a>
         <a href="#contact">联系</a>
       </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle>暗色模式</button>
     </header>
 
     <section id="top" class="hero" aria-label="个人主页首屏">
@@ -896,6 +909,7 @@
     </footer>
   </main>
 
+  <script src="assets/theme.js"></script>
   <script>
     const messages = document.querySelector("#messages");
     const form = document.querySelector("#chat-form");

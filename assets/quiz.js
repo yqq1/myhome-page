@@ -1,8 +1,11 @@
 import {
   escapeHtml,
   formatAnswerDisplay,
+  formatQuestionLimitLabel,
+  getQuestionLimitRange,
   getTypeLabel,
   normalizeQuestion,
+  normalizeQuestionLimit,
   normalizeShortAnswer,
   parseCsv,
   shuffleArray
@@ -11,6 +14,8 @@ import {
 const manifestUrl = "data/quiz-manifest.json";
 const setList = document.querySelector("#set-list");
 const modeSwitch = document.querySelector("#mode-switch");
+const limitSwitch = document.querySelector("#limit-switch");
+const limitInput = document.querySelector("#limit-input");
 const quizRoot = document.querySelector("#quiz-root");
 const quizSubtitle = document.querySelector("#quiz-subtitle");
 
@@ -21,7 +26,9 @@ const state = {
   index: 0,
   score: 0,
   answered: false,
-  randomMode: false
+  randomMode: false,
+  questionLimit: null,
+  wrongQuestions: []
 };
 
 init().catch((error) => {
@@ -34,6 +41,7 @@ async function init() {
 
   state.manifest = await response.json();
   bindModeSwitch();
+  bindLimitSwitch();
   renderSetList();
   renderEmpty("先从左侧选择一个题库开始。");
 }
@@ -70,7 +78,8 @@ async function selectSet(setId) {
   const questions = parseCsv(csvText)
     .filter((row) => row.set === setMeta.id)
     .map(normalizeQuestion);
-  const activeQuestions = state.randomMode ? shuffleArray(questions) : questions;
+  const limitedQuestions = applyQuestionLimit(questions);
+  const activeQuestions = state.randomMode ? shuffleArray(limitedQuestions) : limitedQuestions;
 
   if (!activeQuestions.length) {
     renderEmpty("当前题库没有可用题目。");
@@ -82,9 +91,11 @@ async function selectSet(setId) {
   state.index = 0;
   state.score = 0;
   state.answered = false;
+  state.wrongQuestions = [];
 
   syncActiveCard();
-  quizSubtitle.textContent = `${setMeta.title} · ${setMeta.description} · ${state.randomMode ? "随机出题" : "顺序出题"}`;
+  syncLimitButtons();
+  quizSubtitle.textContent = buildQuizSubtitle(setMeta.title, setMeta.description, questions.length);
   renderQuestion();
 }
 
@@ -128,9 +139,14 @@ function renderQuestion() {
 
 function renderAnswerArea(question) {
   const answerArea = document.querySelector("#answer-area");
-  const activeQuestion = question.type === "single"
-    ? { ...question, options: shuffleArray(question.options) }
-    : question;
+  const activeQuestion = question;
+
+  if (question.type === "single") {
+    question.options = shuffleArray(question.options).map((option, index) => ({
+      ...option,
+      displayKey: String.fromCharCode(65 + index)
+    }));
+  }
 
   if (activeQuestion.type === "short") {
     answerArea.innerHTML = [
@@ -147,7 +163,7 @@ function renderAnswerArea(question) {
       '<label class="option-item">',
       `<input type="${inputType}" name="answer-option" value="${escapeHtml(option.key)}" />`,
       '<span class="option-copy">',
-      `<strong>${escapeHtml(option.key)}</strong>`,
+      `<strong>${escapeHtml(option.displayKey || option.key)}</strong>`,
       `<span>${escapeHtml(option.text)}</span>`,
       "</span>",
       "</label>"
@@ -175,6 +191,18 @@ function bindModeSwitch() {
   syncModeButtons();
 }
 
+function bindLimitSwitch() {
+  document.querySelector("#apply-limit").addEventListener("click", () => setQuestionLimit(limitInput.value));
+  document.querySelector("#clear-limit").addEventListener("click", () => setQuestionLimit("all"));
+  limitInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      setQuestionLimit(limitInput.value);
+    }
+  });
+  syncLimitButtons();
+}
+
 function submitAnswer() {
   if (state.answered) return;
 
@@ -186,6 +214,7 @@ function submitAnswer() {
   const normalizedAnswer = normalizeUserAnswer(question, userAnswer);
   const isCorrect = normalizedAnswer === question.answerKey;
   if (isCorrect) state.score += 1;
+  else state.wrongQuestions.push(question);
 
   state.answered = true;
   document.querySelector("#submit-answer").disabled = true;
@@ -228,12 +257,14 @@ function renderSummary() {
     "</div>",
     '<div class="action-row summary-actions">',
     '<button id="restart-set" class="button" type="button">重新开始</button>',
+    `<button id="retry-wrong" class="ghost-button" type="button"${wrong ? "" : " disabled"}>重答错题</button>`,
     '<button id="back-from-summary" class="ghost-button" type="button">返回题库列表</button>',
     "</div>",
     "</div>"
   ].join("");
 
   document.querySelector("#restart-set").addEventListener("click", restartCurrentSet);
+  document.querySelector("#retry-wrong").addEventListener("click", retryWrongQuestions);
   document.querySelector("#back-from-summary").addEventListener("click", resetToSetList);
 }
 
@@ -254,6 +285,18 @@ function restartCurrentSet() {
   selectSet(state.activeSetId).catch((error) => renderEmpty(`题库加载失败：${error.message}`));
 }
 
+function retryWrongQuestions() {
+  if (!state.wrongQuestions.length) return;
+
+  state.questions = state.wrongQuestions;
+  state.index = 0;
+  state.score = 0;
+  state.answered = false;
+  state.wrongQuestions = [];
+  quizSubtitle.textContent = `重答错题 · 共 ${state.questions.length} 题`;
+  renderQuestion();
+}
+
 function setQuestionMode(nextRandomMode) {
   if (state.randomMode === nextRandomMode) return;
   state.randomMode = nextRandomMode;
@@ -264,7 +307,22 @@ function setQuestionMode(nextRandomMode) {
     return;
   }
 
-  quizSubtitle.textContent = `先从左侧选择一个题库开始。当前为${state.randomMode ? "随机出题" : "顺序出题"}。`;
+  quizSubtitle.textContent = buildIdleSubtitle();
+}
+
+function setQuestionLimit(limitValue) {
+  const nextLimit = normalizeQuestionLimit(limitValue);
+  if (state.questionLimit === nextLimit) return;
+
+  state.questionLimit = nextLimit;
+  syncLimitButtons();
+
+  if (state.activeSetId) {
+    restartCurrentSet();
+    return;
+  }
+
+  quizSubtitle.textContent = buildIdleSubtitle();
 }
 
 function resetToSetList() {
@@ -273,8 +331,10 @@ function resetToSetList() {
   state.index = 0;
   state.score = 0;
   state.answered = false;
-  quizSubtitle.textContent = `先从左侧选择一个题库开始。当前为${state.randomMode ? "随机出题" : "顺序出题"}。`;
+  state.wrongQuestions = [];
+  quizSubtitle.textContent = buildIdleSubtitle();
   syncActiveCard();
+  syncLimitButtons();
   renderEmpty("先从左侧选择一个题库开始。");
 }
 
@@ -310,7 +370,7 @@ function toggleSubmitState() {
 }
 
 function disableAnswerInputs() {
-  document.querySelectorAll("input, textarea").forEach((element) => {
+  document.querySelector("#answer-area")?.querySelectorAll("input, textarea").forEach((element) => {
     element.disabled = true;
   });
 }
@@ -326,4 +386,28 @@ function syncModeButtons() {
     const isRandomButton = button.dataset.mode === "random";
     button.classList.toggle("active", state.randomMode === isRandomButton);
   });
+}
+
+function syncLimitButtons() {
+  limitInput.disabled = false;
+  document.querySelector("#clear-limit").classList.toggle("active", state.questionLimit === null);
+  limitInput.value = "";
+}
+
+function applyQuestionLimit(questions) {
+  const range = getQuestionLimitRange(state.questionLimit, questions.length);
+  if (!range) return questions;
+  return questions.slice(range.start - 1, range.end);
+}
+
+function buildIdleSubtitle() {
+  const limitLabel = formatQuestionLimitLabel(state.questionLimit);
+  const modeLabel = state.randomMode ? "随机出题" : "顺序出题";
+  return `先从左侧选择一个题库开始。当前为${modeLabel}，${limitLabel}。`;
+}
+
+function buildQuizSubtitle(title, description, total) {
+  const limitLabel = state.questionLimit ? formatQuestionLimitLabel(state.questionLimit, total) : `共 ${state.questions.length} 题`;
+  const modeLabel = state.randomMode ? "随机出题" : "顺序出题";
+  return `${title} · ${description} · ${modeLabel} · ${limitLabel}`;
 }

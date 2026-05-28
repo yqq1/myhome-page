@@ -182,7 +182,7 @@ async function handleChat(request, response) {
 }
 
 function serveStatic(request, response) {
-  const requestPath = new URL(request.url, `http://${request.headers.host}`).pathname;
+  const requestPath = decodeRequestPath(request);
   const safePath = requestPath === "/" ? "/index.html" : requestPath;
   const filePath = path.join(rootDir, path.normalize(safePath).replace(/^(\.\.[/\\])+/, ""));
 
@@ -218,8 +218,18 @@ function serveStatic(request, response) {
   });
 }
 
-const server = http.createServer((request, response) => {
+function decodeRequestPath(request) {
   const pathname = new URL(request.url, `http://${request.headers.host}`).pathname;
+
+  try {
+    return decodeURIComponent(pathname);
+  } catch {
+    return pathname;
+  }
+}
+
+const server = http.createServer((request, response) => {
+  const pathname = decodeRequestPath(request);
 
   if (pathname === "/api/chat") {
     if (request.method !== "POST") {

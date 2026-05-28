@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YQ | Works</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260528" />
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("yq-theme");
+        const theme = savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {}
+    })();
+  </script>
   <style>
     :root {
       --bg: #f6f9ff;
@@ -333,6 +344,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="assets/theme.css" />
 </head>
 <body>
   <main class="page">
@@ -346,6 +358,7 @@
         <a class="active" href="works.html">作品</a>
         <a href="index.html#contact">联系</a>
       </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle>暗色模式</button>
     </header>
 
     <section class="works-hero" aria-label="作品页介绍">
@@ -382,7 +395,7 @@
         <article class="project-card">
           <div>
             <span class="project-meta">个人主页</span>
-            <h3>YQ Digital Home</h3>
+            <h3>YQ 主页</h3>
             <p>当前正在搭建的个人主页，包含个人介绍、作品入口和接入 DeepSeek 的数字分身聊天区。</p>
             <div class="project-tags" aria-label="项目技术标签">
               <span>HTML</span>
@@ -426,5 +439,6 @@
       <span>YQ personal homepage prototype · works</span>
     </footer>
   </main>
+  <script src="assets/theme.js"></script>
 </body>
 </html>

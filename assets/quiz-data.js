@@ -94,6 +94,33 @@ export function formatAnswerDisplay(question, answer) {
   return formatOptionLabel(question, answer);
 }
 
+export function normalizeQuestionLimit(value) {
+  const trimmedValue = String(value || "").trim();
+  if (!trimmedValue || trimmedValue === "all") return null;
+  if (/^\d+$/.test(trimmedValue)) return String(Math.max(1, Math.floor(Number(trimmedValue))));
+  if (!/^\d+\s*-\s*\d+$/.test(trimmedValue)) return null;
+
+  const [rawStart, rawEnd] = trimmedValue.split("-").map((item) => Math.max(1, Math.floor(Number(item.trim()))));
+  const start = Math.min(rawStart, rawEnd);
+  const end = Math.max(rawStart, rawEnd);
+  return `${start}-${end}`;
+}
+
+export function getQuestionLimitRange(limitValue, total) {
+  if (!limitValue) return null;
+  if (!limitValue.includes("-")) return { start: 1, end: Math.min(Number(limitValue), total) };
+
+  const [rawStart, rawEnd] = limitValue.split("-").map(Number);
+  return { start: Math.min(rawStart, total), end: Math.min(rawEnd, total) };
+}
+
+export function formatQuestionLimitLabel(limitValue, total = null) {
+  if (!limitValue) return "全部题目";
+
+  const range = total === null ? getQuestionLimitRange(limitValue, Number.MAX_SAFE_INTEGER) : getQuestionLimitRange(limitValue, total);
+  return `${range.start}-${range.end} 题`;
+}
+
 export function normalizeShortAnswer(value) {
   return String(value)
     .normalize("NFKC")
@@ -139,5 +166,5 @@ function parseOption(rawOption) {
 function formatOptionLabel(question, key) {
   const option = question.options.find((item) => item.key === key);
   if (!option) return key;
-  return `${option.key} ${option.text}`;
+  return `${option.displayKey || option.key} ${option.text}`;
 }
