@@ -14,5 +14,45 @@
     "badge": "听力",
     "file": "data/听力第一章.csv",
     "questionCount": 80
+  },
+  {
+    "id": "英语作文",
+    "title": "英语作文",
+    "description": "3篇作文",
+    "badge": "作文",
+    "file": "data/英语作文.csv",
+    "questionCount": 30
+  },
+  {
+    "id": "计算机组成原理",
+    "title": "计算机组成原理",
+    "description": "选择题 110 题，填空题 40 题",
+    "badge": "计组",
+    "file": "data/计算机组成原理.csv",
+    "questionCount": 150
+  },
+  {
+    "id": "android-single",
+    "title": "Android 单选题",
+    "description": "Android 单选 64 题",
+    "badge": "单选",
+    "file": "data/android-单选.csv",
+    "questionCount": 64
+  },
+  {
+    "id": "android-multiple",
+    "title": "Android 多选题",
+    "description": "Android 多选 31 题",
+    "badge": "多选",
+    "file": "data/android-多选.csv",
+    "questionCount": 31
+  },
+  {
+    "id": "android-judge",
+    "title": "Android 判断题",
+    "description": "Android 判断 31 题",
+    "badge": "判断",
+    "file": "data/android-判断.csv",
+    "questionCount": 31
   }
 ]

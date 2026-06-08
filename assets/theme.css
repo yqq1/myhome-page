@@ -225,6 +225,15 @@ html[data-theme="dark"] .result-box[data-state="wrong"] {
   border-color: rgba(248, 113, 113, 0.4);
 }
 
+html[data-theme="dark"] .answer-diff-wrong {
+  background: rgba(248, 113, 113, 0.22);
+  color: #fecaca;
+}
+
+html[data-theme="dark"] .answer-diff-missing {
+  color: #fecaca;
+}
+
 html[data-theme="dark"] .chip.sky {
   background: rgba(103, 194, 255, 0.14);
 }

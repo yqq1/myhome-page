@@ -94,6 +94,59 @@ export function formatAnswerDisplay(question, answer) {
   return formatOptionLabel(question, answer);
 }
 
+export function formatShortAnswerDiff(userAnswer, expectedAnswer) {
+  const parts = Array.from(String(userAnswer)).map((char) => ({ char, tokens: [] }));
+  const userTokens = [];
+
+  parts.forEach((part, partIndex) => {
+    Array.from(normalizeShortAnswer(part.char)).forEach((token) => {
+      part.tokens.push(userTokens.length);
+      userTokens.push({ token, partIndex, matched: false });
+    });
+  });
+
+  const expectedTokens = Array.from(normalizeShortAnswer(expectedAnswer));
+  markMatchedTokens(userTokens, expectedTokens);
+
+  const html = parts.map((part) => {
+    const isWrong = part.tokens.some((tokenIndex) => !userTokens[tokenIndex].matched);
+    const escapedChar = escapeHtml(part.char);
+    return isWrong ? `<span class="answer-diff-wrong">${escapedChar}</span>` : escapedChar;
+  }).join("");
+
+  const hasMarkedWrong = userTokens.some((item) => !item.matched);
+  const isDifferent = userTokens.map((item) => item.token).join("") !== expectedTokens.join("");
+  return html || isDifferent
+    ? `${html}${isDifferent && !hasMarkedWrong ? '<span class="answer-diff-missing">（可能缺少内容）</span>' : ""}`
+    : html;
+}
+
+function markMatchedTokens(userTokens, expectedTokens) {
+  const table = Array.from({ length: userTokens.length + 1 }, () => Array(expectedTokens.length + 1).fill(0));
+
+  for (let userIndex = userTokens.length - 1; userIndex >= 0; userIndex -= 1) {
+    for (let expectedIndex = expectedTokens.length - 1; expectedIndex >= 0; expectedIndex -= 1) {
+      table[userIndex][expectedIndex] = userTokens[userIndex].token === expectedTokens[expectedIndex]
+        ? table[userIndex + 1][expectedIndex + 1] + 1
+        : Math.max(table[userIndex + 1][expectedIndex], table[userIndex][expectedIndex + 1]);
+    }
+  }
+
+  let userIndex = 0;
+  let expectedIndex = 0;
+  while (userIndex < userTokens.length && expectedIndex < expectedTokens.length) {
+    if (userTokens[userIndex].token === expectedTokens[expectedIndex]) {
+      userTokens[userIndex].matched = true;
+      userIndex += 1;
+      expectedIndex += 1;
+    } else if (table[userIndex + 1][expectedIndex] >= table[userIndex][expectedIndex + 1]) {
+      userIndex += 1;
+    } else {
+      expectedIndex += 1;
+    }
+  }
+}
+
 export function normalizeQuestionLimit(value) {
   const trimmedValue = String(value || "").trim();
   if (!trimmedValue || trimmedValue === "all") return null;

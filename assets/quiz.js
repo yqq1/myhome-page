@@ -2,6 +2,7 @@ import {
   escapeHtml,
   formatAnswerDisplay,
   formatQuestionLimitLabel,
+  formatShortAnswerDiff,
   getQuestionLimitRange,
   getTypeLabel,
   normalizeQuestion,
@@ -16,6 +17,7 @@ const setList = document.querySelector("#set-list");
 const modeSwitch = document.querySelector("#mode-switch");
 const limitSwitch = document.querySelector("#limit-switch");
 const limitInput = document.querySelector("#limit-input");
+const hideQuestionToggle = document.querySelector("#hide-question-toggle");
 const quizRoot = document.querySelector("#quiz-root");
 const quizSubtitle = document.querySelector("#quiz-subtitle");
 
@@ -28,6 +30,7 @@ const state = {
   answered: false,
   randomMode: false,
   questionLimit: null,
+  hideQuestion: false,
   wrongQuestions: []
 };
 
@@ -42,6 +45,7 @@ async function init() {
   state.manifest = await response.json();
   bindModeSwitch();
   bindLimitSwitch();
+  bindPracticeOptions();
   renderSetList();
   renderEmpty("先从左侧选择一个题库开始。");
 }
@@ -118,7 +122,7 @@ function renderQuestion() {
     `<div class="progress-fill" style="width: ${progress}%"></div>`,
     "</div>",
     '<div class="question-body">',
-    `<h3 class="question-title">${escapeHtml(question.title)}</h3>`,
+    renderQuestionTitle(question),
     '<div id="answer-area"></div>',
     "</div>",
     '<div id="result-area"></div>',
@@ -203,6 +207,13 @@ function bindLimitSwitch() {
   syncLimitButtons();
 }
 
+function bindPracticeOptions() {
+  hideQuestionToggle.addEventListener("change", () => {
+    state.hideQuestion = hideQuestionToggle.checked;
+    if (state.questions.length && !state.answered) renderQuestion();
+  });
+}
+
 function submitAnswer() {
   if (state.answered) return;
 
@@ -212,7 +223,7 @@ function submitAnswer() {
   if (!hasAnswer) return;
 
   const normalizedAnswer = normalizeUserAnswer(question, userAnswer);
-  const isCorrect = normalizedAnswer === question.answerKey;
+  const isCorrect = normalizedAnswer === question.answerKey || (question.type === "short" && userAnswer === "1");
   if (isCorrect) state.score += 1;
   else state.wrongQuestions.push(question);
 
@@ -220,7 +231,7 @@ function submitAnswer() {
   document.querySelector("#submit-answer").disabled = true;
   document.querySelector("#next-question").disabled = false;
   disableAnswerInputs();
-  renderResult(question, isCorrect, normalizedAnswer);
+  renderResult(question, isCorrect, userAnswer, normalizedAnswer);
 }
 
 function nextQuestion() {
@@ -229,15 +240,27 @@ function nextQuestion() {
   renderQuestion();
 }
 
-function renderResult(question, isCorrect, normalizedAnswer) {
+function renderResult(question, isCorrect, userAnswer, normalizedAnswer) {
   const resultArea = document.querySelector("#result-area");
   resultArea.innerHTML = [
     `<div class="result-box" data-state="${isCorrect ? "correct" : "wrong"}">`,
     `<h4 class="result-title">${isCorrect ? "回答正确" : "回答错误"}</h4>`,
-    `<p class="result-answer">你的答案：${escapeHtml(formatAnswerDisplay(question, normalizedAnswer))}</p>`,
+    `<p class="result-answer">你的答案：${renderUserAnswer(question, isCorrect, userAnswer, normalizedAnswer)}</p>`,
     `<p class="result-answer">标准答案：${escapeHtml(formatAnswerDisplay(question, question.answer))}</p>`,
     "</div>"
   ].join("");
+}
+
+function renderUserAnswer(question, isCorrect, userAnswer, normalizedAnswer) {
+  if (question.type !== "short") {
+    return escapeHtml(formatAnswerDisplay(question, normalizedAnswer));
+  }
+
+  if (isCorrect) {
+    return escapeHtml(formatAnswerDisplay(question, userAnswer));
+  }
+
+  return formatShortAnswerDiff(userAnswer, question.answer);
 }
 
 function renderSummary() {
@@ -274,6 +297,14 @@ function renderEmpty(message) {
     `<p class="helper">${escapeHtml(message)}</p>`,
     "</div>"
   ].join("");
+}
+
+function renderQuestionTitle(question) {
+  if (!state.hideQuestion) {
+    return `<h3 class="question-title">${escapeHtml(question.title)}</h3>`;
+  }
+
+  return '<p class="hidden-question-note">题目已隐藏，可以直接默写答案。</p>';
 }
 
 function summaryCell(value, label) {

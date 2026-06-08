@@ -46,7 +46,7 @@ a { color: inherit; }
 .nav, .action-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .nav { justify-content: flex-end; }
 .mode-switch { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-.mode-switch:last-of-type { margin-bottom: 24px; }
+.mode-switch:last-of-type { margin-bottom: 12px; }
 .limit-input {
   min-width: 132px;
   min-height: 40px;
@@ -60,6 +60,54 @@ a { color: inherit; }
   border-color: var(--sky);
   box-shadow: 0 0 0 4px rgba(57, 169, 238, 0.12);
   outline: none;
+}
+.practice-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  min-height: 32px;
+  margin: -2px 0 22px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.practice-toggle input {
+  appearance: none;
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-soft);
+  cursor: pointer;
+}
+.practice-toggle input::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--muted);
+  transition: transform 160ms ease, background 160ms ease;
+}
+.practice-toggle input:checked {
+  border-color: rgba(57, 169, 238, 0.46);
+  background: rgba(57, 169, 238, 0.16);
+}
+.practice-toggle input:checked::after {
+  transform: translateX(14px);
+  background: var(--sky);
+}
+.practice-toggle:focus-within {
+  color: var(--text);
+}
+.practice-toggle input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(57, 169, 238, 0.12);
 }
 .nav a {
   min-height: 44px;
@@ -213,6 +261,28 @@ h1 { margin: 22px 0 0; color: var(--ink); font-size: clamp(40px, 7vw, 74px); lin
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+.hidden-question-note {
+  margin: 0 0 14px;
+  border: 1px dashed rgba(57, 169, 238, 0.36);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: rgba(57, 169, 238, 0.08);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+.answer-diff-wrong {
+  border-radius: 4px;
+  padding: 1px 2px;
+  background: rgba(212, 91, 108, 0.18);
+  color: #b4233b;
+  font-weight: 900;
+}
+.answer-diff-missing {
+  margin-left: 8px;
+  color: #b4233b;
+  font-weight: 900;
+}
 
 .short-answer {
   width: 100%;
@@ -290,6 +360,7 @@ h1 { margin: 22px 0 0; color: var(--ink); font-size: clamp(40px, 7vw, 74px); lin
   }
   .summary-grid { grid-template-columns: 1fr; }
   .limit-input,
+  .practice-toggle,
   .mode-button,
   .button, .ghost-button { width: 100%; }
   .action-group .button,

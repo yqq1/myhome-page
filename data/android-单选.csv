@@ -1,0 +1,65 @@
+id,set,title,type,options,answer
+1,android-single,"在移动通信技术发展中,以数字语音传输技术为核心的是( )。",single,A.第二代移动通信技术(2G)|B.第三代移动通信技术(3G)|C.第四代移动通信技术(4G)|D.第五代移动通信技术(5G),A
+2,android-single,"Android 项目中的主题和样式资源,通常放在( ) 目录下?",single,A.res/drawable|B.res/layout|C.res/values|D.assets,C
+3,android-single,"下列关于 AndroidManifest.xml文件的说法中,错误的是( )。",single,A.它是整个程序的配置文件|B.可以在该文件中配置程序所需的权限|C.可以在该文件中注册程序用到的组件|D.该文件可以设置UI布局,D
+4,android-single,Android 中短信、联系人管理、浏览器等属于Android 系统架构中的( )一层。,single,A.应用程序层|B.应用程序框架层|C.核心类库层|D.Linux 内核层,A
+5,android-single,帧布局 FrameLayout 是将其中的组件放在自己的()位置。,single,A.左上角|B.右上角|C.左下角|D.右下角,A
+6,android-single,"下列关于 RelativeLayout 的描述,正确的是()。",single,"A.RelativeLayout表示绝对布局,可以自定义控件的x、y的位置|B.RelativeLayout表示帧布局,可以实现标签切换的功能|C.RelativeLayout 表示相对布局,其中控件的位置都是相对位置|D.RelativeLayout表示表格布局,需要配合 TableRow一起使用",C
+7,android-single,"在XML 布局中定义了一个Button,决定 Button 按钮上显示文字的属性是( )",single,A.android:value|B.android:text|C.android:id|D.android:textvalue,B
+8,android-single,"使用 EditText控件时,当文本内容为空时,如果想做一些提示,那么可以使用的属性是( )。",single,A.android:text|B.android:background|C.android:inputType|D.android:hint,D
+9,android-single,"下列关于 ListView的说法中,正确的是( )。",single,"A.ListView 的条目不能设置点击事件|B.ListView 不设置 Adapter 也能显示数据内容|C.当数据超出能显示范围时,ListView 自动具有可滚动的特性|D.若 ListView 当前能显示10条,一共有100条数据,则产生了100个View",C
+10,android-single,"下列选项中,不属于Android 四大组件的是()。",single,A.Service|B.Activity|C.Handler|D.ContentProvider,C
+11,android-single,"下列选项中,哪个不是Activity 生命周期方法()。",single,A.onCreate()|B.startActivity()|C.onStart()|D.onResume(),B
+12,android-single,"Android 对数据库的表进行查询操作时,会使用SQLiteDatabase 类中的( )方法。",single,A.insert()|B.execSQL()|C.query()|D.update(),C
+13,android-single,"下列关于 SQLite 数据库的描述中,错误的是()。",single,"A.SqliteOpenHelper类有创建数据库和更新数据库版本的的功能。|B.SqliteDatabase 类是用来操作数据库的。|C.每次调用 SqliteDatabase 的 getWritableDatabase方法时,都会执行 SqliteOpenHelper 的onCreate()方法。|D.当数据库版本发生变化时,会调用 SqliteOpenHelper 的onUpgrade()方法更新数据库。",C
+14,android-single,"自定义内容观察者时,需要继承的类是( )。",single,A.BaseObserver|B.ContentObserver|C.BasicObserver|D.DefalutObserver,B
+15,android-single,"如果通过 bindService 方式开启服务,那么服务的生命周期是( )。",single,A.onCreate() onStart() onBind() onDestroy()|B.onCreate() onBind() onDestroy()|C.onCreate() onBind() onUnBind() onDestroy()|D.onCreate() onStart() onBind() onUnBind() onDestroy(),C
+16,android-single,"下列关于 Service的方法描述,错误的是( )。",single,A.onCreate()表示第一次创建服务时执行的方法|B.调用 startService()方法启动服务时执行的方法是onStartCommand()|C.调用 bindService()方法启动服务时执行的方法是 onBind()|D.调用 startService()方法断开服务绑定时执行的方法是 onUnbind(),D
+17,android-single,"查询手机系统短信时,内容提供者对应的Uri为( )。",single,"A.Contacts.Photos.CONTENT_URI|B.Contacts.People.CONTENT_URI|C.""content://sms/""|D.Media.EXTERNAL_CONTENT_URI",C
+18,android-single,Android 中与密度无关的尺寸单位()主要用于设置字体大小,single,A.px|B.sp|C.mm|D.dp,B
+19,android-single,以下()方法用来设置控件字体的颜色,single,A.setText()|B.setTextSize()|C.setTextColor()|D.setGravity(),C
+20,android-single,如图界面最适合采用以下()布局方式,single,A.线性布局|B.帧布局|C.表格布局|D.相对布局,C
+21,android-single,RadioButton 控件被选中的监听事件通常使用以下哪个监听器,single,A.setOnClickListener|B.setOnCheckedChangeListener|C.setOnMenuItemSelectedListener|D.setOnCheckedListener,B
+22,android-single,Android 中的电话、信息、联系人等程序属于Android 体系结构中的哪一层,single,A.应用程序层|B.应用程序框架层|C.核心内库层|D.Linux内核层,A
+23,android-single,"以下实现 Button 控件单击事件的方式中,()适用于界面上 Button 控件较多的情况",single,A.在布局文件中指定 onClick属性的值|B.使用匿名内部类|C.使用 Activity 实现 OnClickListener 接口|D.以上都可以,C
+24,android-single,"ListView 控件添加数据时会用到数据适配器,以下哪种适配器通常用于适配 TextView控件",single,A.BaseAdapter|B.SimpleAdapter|C.ArrayAdapter|D.以上都可以,C
+25,android-single,"Android 自定义控件中,()方法用于绘制图像",single,A.onMeasure()|B.onDraw()|C.onLayout()|D.以上都可以,B
+26,android-single,"Activity 生命周期方法中,()方法是在创建 Activity 时调用,通常做些初始化设置",single,A.onCreate()|B.onPause()|C.onRestart()|D.onDestroy(),A
+27,android-single,"Activity 之间进行数据回传时包含3个方法,其中不包含()",single,A.startActivityForResult()|B.setResult()|C.onActivityResult()|D.startActivity(),D
+28,android-single,"在Activity 引用的布局文件中添加 Fragment时,需要使用()标签",single,A.<fragment></fragment>|B.<activity></activity>|C.<listview></listview>|D.<include></include>,A
+29,android-single,SharedPreferences Editor 编辑器对象的()方法用于提交数据,single,A.commit()|B.remove()|C.clear()|D.putString(),A
+30,android-single,"数据库事务包括4个要素,其中原子性指的是( )",single,"A.事务中的操作要么全部成功,要么全部失败回滚|B.事务开始之前和结束之后,数据库的完整性没有被破坏|C.一个事务内部的操作必须封锁起来,不会被其他事务影响到|D.事务一旦提交,该事务对数据做的更改便持久保存在数据库中",A
+31,android-single,"Uri为ContentProvider 中的数据建立了唯一标识符,以下地址正确的是()",single,A.content:\cn.itcast.mycontentprovider\person|B.content://cn.itcast.mycontentprovider/person|C.http:\cn.itcast.mycontentprovider\person|D.http://cn.itcast.mycontentprovider/person,B
+32,android-single,"Android中,发送无序广播使用()方法",single,A.sendOrderedBroadcast()|B.sendBroadcast()|C.abortBroadcast()|D.以上都可以,B
+33,android-single,"在Android程序中,()是专门用于浏览网页的",single,A.WebView 控件|B.VideoView 控件|C.RecyclerView 控件|D.ListView 控件,A
+34,android-single,"Android 提供了3种动画模式,其中补间动画指的是( )",single,"A.按照事先准备好的静态图像顺序播放,利用人眼的“视觉暂留”原理产生动画|B.将值赋给指定对象的指定属性,以实现动画操作|C.通过对 View 进行一系列的变换操作来实现动画效果|D.以上都不对",C
+35,android-single,"Android中,SoundPool类可以同时播放多个短小的音频,其中()方法用于加载音频文件",single,A.play()|B.stop()|C.load()|D.unload(),C
+36,android-single,下列关于AndroidManifest.xml文件的说法错误的是()。,single,A.它是整个程序的配置文件|B.可以在该文件中配置程序所需的权限|C.可以在该文件中注册程序用到的组件|D.该文件可以设置UI布局,D
+37,android-single,Dalvik 虚拟机属于下列Android 体系结构中的哪一层?(),single,A.应用程序层|B.应用程序框架层|C.核心类库层|D.Linux 内核层,C
+38,android-single,Android 中短信、联系人管理、浏览器等属于下列Android 系统结构中的哪一层?(),single,A.应用程序层|B.应用程序框架层|C.核心类库层|D.Linux 内核层,A
+39,android-single,"下列选项中,用于设置线性布局方向的属性是( )。",single,A.orientation|B.gravity|C.layout_gravity|D.padding,A
+40,android-single,"下列选项中,不属于Android布局的是()。",single,A.FrameLayout|B.LinearLayout|C.Button|D.RelativeLayout,C
+41,android-single,帧布局 FrameLayout 是将其中的组件放在下列选项中的哪个位置?(),single,A.左上角|B.右上角|C.左下角|D.右下角,A
+42,android-single,"下列选项中,不属于android:layout_width属性值的是()。",single,A.match_parent|B.fill_parent|C.wrap_content|D.match_content,D
+43,android-single,"下列关于 RelativeLayout的描述,正确的是()。",single,"A.RelativeLayout 表示绝对布局,可以自定义控件的x、y的位置|B.RelativeLayout 表示帧布局,可以实现标签切换的功能|C.RelativeLayout 表示相对布局,其中控件的位置都是相对位置|D.RelativeLayout 表示表格布局,需要配合TableRow一起使用",C
+44,android-single,"下列方法中,用于启动Activity的方法是()。",single,A.startActivity()|B.goToActivity()|C.startActivityResult()|D.以上都是,A
+45,android-single,"下列关于 Intent 的描述中,正确的是()。",single,"A.Intent 不能够实现应用程序间的数据共享|B.Intent 可以实现界面的切换,还可以在不同组件间直接进行数据传递|C.使用显式 Intent 可以不指定要跳转的目标组件|D.隐式 Intent 不会明确指出需要激活的目标组件,所以无法实现组件之间的数据跳转",B
+46,android-single,"下列选项中,可以设置Button 控件上显示文字的属性是()。",single,A.android:value|B.android:text|C.android:id|D.android:textvalue,B
+47,android-single,"下列选项中,能够设置TextView控件中文字大小的是()。",single,"A.android:textSize=""18""|B.android:size=""18""|C.android:textSize=""18sp""|D.android:size=""18sp""",C
+48,android-single,"下列选项中,用于设置EditText 控件内容为空时的提示信息的属性是()。",single,A.android:text|B.android:background|C.android:inputType|D.android:hint,D
+49,android-single,"下列选项中,用于设置ImageView控件需要显示的图片资源的属性是()。",single,A.android:src|B.android:background|C.android:img|D.android:value,A
+50,android-single,下列关于ListView控件的说法正确的是()。,single,"A.ListView控件中的条目不能设置点击事件|B.ListView控件不设置适配器也能显示数据|C.当数据超出能显示范围时,ListView控件会自动具有可滚动的特性|D.若 ListView控件当前能显示10条数据,一共有100条数据,则程序会产生100个View",C
+51,android-single,"下列选项中,用于设置CheckBox控件的监听器的方法是()。",single,A.setOnClickListener()|B.setOnCheckedChangeListener()|C.setOnMenuItemSelectedListener()|D.setOnCheckedListener(),B
+52,android-single,"下列选项中,能够将TextView控件设置为多行显示的属性是()。",single,A.android:lines|B.android:layout_height|C.android:textcolor|D.android:textsize,A
+53,android-single,"下列关于AlertDialog的描述,错误的是()。",single,A.使用new 关键字创建 AlertDialog 的实例|B.对话框的显示需要调用show()方法|C.setPositiveButton()方法用于设置“确定”按钮|D.setNegativeButton()方法用于设置“取消”按钮,A
+54,android-single,下列关于初始化 SharedPreferences 类的代码正确的是()。,single,A.SharedPreferences sp = new SharedPreferences();|B.SharedPreferences sp = SharedPreferences.getDefault();|C.SharedPreferences sp = SharedPreferences.Factory();|D.SharedPreferences sp = getSharedPreferences();,D
+55,android-single,"下列选项中,可以实现访问其他应用程序中数据的组件是()。",single,A.BroadcastReceiver|B.Activity|C.ContentProvider|D.AIDL,C
+56,android-single,"下列选项中,能够获取ContentProvider 的实例对象的方法是()。",single,A.new ContentResolver()|B.getContentResolver()|C.newInstance()|D.ContentUris.newInstance(),B
+57,android-single,"下列关于 ContentProvider的描述,错误的是()。",single,"A.ContentProvider 是一个抽象类,只有继承后才能使用|B.ContentProvider 只有在AndroidManifest.xml文件中注册后才能运行|C.ContentProvider 为其他应用程序提供了统一的访问数据库的方式|D.以上说法都不对",D
+58,android-single,"下列选项中,调用bindService()方法开启服务时,程序执行服务生命周期的方法依次是()。",single,A.onCreate() onStart() onBind() onDestroy()|B.onCreate() onBind() onDestroy()|C.onCreate() onBind() onUnBind() onDestroy()|D.onCreate() onStart() onBind() onUnBind() onDestroy(),C
+59,android-single,"下列关于 Service 服务的描述中,错误的是()。",single,"A.Service 是没有用户可见的界面,不能与用户交互|B.Service 可以通过Context.startService()来启动|C.Service 可以通过Context.bindService()来启动|D.Service 无须在清单文件中进行配置",D
+60,android-single,"下列关于 Service的生命周期方法的描述,错误的是()。",single,A.onCreate()表示第一次创建服务时执行的方法|B.调用 startService()方法启动服务时执行的方法是onStartCommand()|C.调用 bindService()方法启动服务时执行的方法是onBind()|D.调用 startService()方法断开服务绑定时执行的方法是 onUnbind(),D
+61,android-single,下列关于 Handler 消息机制中Message的描述正确的是()。,single,"A.可以携带少量的信息,用于在不同线程之间交换数据|B.存放通过Handler 发送的消息|C.开启消息循环|D.发送消息和处理消息",A
+62,android-single,下列关于基于监听接口机制的事件处理中的事件源的描述正确的是()。,single,"A.封装了界面组件发生的特定事情|B.事件发生的场所,通常是指各个组件|C.负责监听事件源所发生的事件|D.对各种事件做出相应的响应",B
+63,android-single,"下列关于 Service的生命周期方法的描述,错误的是()。",single,A.onCreate()表示第一次创建服务时执行的方法|B.调用 startService()方法启动服务时执行的方法是onStartCommand()|C.调用 bindService()方法启动服务时执行的方法是onBind()|D.调用 startService()方法断开服务绑定时执行的方法是 onUnbind(),D
+64,android-single,下列关于基于监听接口机制的事件处理中的事件源的描述正确的是()。,single,"A.封装了界面组件发生的特定事情|B.事件发生的场所,通常是指各个组件|C.负责监听事件源所发生的事件|D.对各种事件做出相应的响应",B

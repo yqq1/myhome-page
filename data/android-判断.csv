@@ -1,0 +1,32 @@
+id,set,title,type,options,answer
+1,android-judge,"Android 系统采用分层架构,分别是应用程序层、应用程序框架层、核心类库和Linux内核。",judge,对|错,对
+2,android-judge,"如果在帧布局 FrameLayout 中放入三个所有属性都相同的按钮,那么能够在屏幕上显示的是第一个被添加的按钮",judge,对|错,错
+3,android-judge,"Toast 是 Android 系统提供的轻量级信息提醒机制,用于向用户提示即时消息",judge,对|错,对
+4,android-judge,"如果想要关闭当前的Activity,可以调用Activity 提供的finish()方法",judge,对|错,对
+5,android-judge,"使用 openFileOutput()方式打开应用程序的输出流时,只需要指定文件名",judge,对|错,错
+6,android-judge,"在清单文件中注册广播接收者时,可在<intent-filter>标签中使用 priority 属性设置优先级别,属性值越大优先级越高。",judge,对|错,对
+7,android-judge,"使用服务的通信方式进行通信时,必须保证服务是以绑定的方式开启的,否则无法通信。",judge,对|错,对
+8,android-judge,事件监听的处理模型主要包含事件源、事件和事件监听器。,judge,对|错,对
+9,android-judge,"使用HttpURLConnection 进行HTTP网络通信时,GET方式发送的请求只能发送大小在2048个字节内的数据。",judge,对|错,错
+10,android-judge,在相对布局中定义的控件默认与父布局左上角对齐,judge,对|错,错
+11,android-judge,"在Android中,当通过内容解析者读取手机通讯录数据时,不需要申请读取手机通讯录的权限",judge,对|错,错
+12,android-judge,Service 与Activity的生命周期方法是一致的,judge,对|错,错
+13,android-judge,"一个组件只能绑定一个服务,一个服务只能被一个组件绑定",judge,对|错,错
+14,android-judge,View 的绘制流程依次是onMeasure()、onLayout()、onDraw(),judge,对|错,对
+15,android-judge,ContentProvider 是Android 提供的应用程序之间数据共享的唯一方式,judge,对|错,错
+16,android-judge,BroadcastReceiver 的生命周期从onReceive()开始到 onReceive()结束,judge,对|错,对
+17,android-judge,AndroidManifest.xml中注册 ContentProvider时不需要指定 authorities属性,judge,对|错,错
+18,android-judge,ViewGroup 是盛放界面控件的容器,judge,对|错,对
+19,android-judge,"如果在帧布局 FrameLayout 中放入三个所有属性都相同的按钮,那么能够在屏幕上显示的是第一个被添加的按钮。",judge,对|错,错
+20,android-judge,Android 中的布局文件通常放在res\layout 文件夹中。,judge,对|错,对
+21,android-judge,"TableLayout 继承自LinearLayout,因此它完全支持LinearLayout所支持的属性。",judge,对|错,对
+22,android-judge,LinearLayout 布局中的android:layout_weight属性用于设置布局内控件所占的权重。,judge,对|错,对
+23,android-judge,"Broadcast 表示广播,它是一种运用在应用程序之间传递消息的机制。",judge,对|错,对
+24,android-judge,"在清单文件中注册广播接收者时,可在<intent-filter>标签中使用 priority 属性设置优先级别,属性值越大优先级越高。",judge,对|错,对
+25,android-judge,有序广播的广播效率比无序广播更高。,judge,对|错,错
+26,android-judge,动态注册的广播接收者的生命周期依赖于注册广播的组件。,judge,对|错,对
+27,android-judge,Android 中广播接收者必须在清单文件里面注册。,judge,对|错,错
+28,android-judge,HttpURLConnection 用于发送 HTTP请求和获取HTTP响应。,judge,对|错,对
+29,android-judge,"Android 中的WebView控件是专门用于浏览网页的,其使用方法与其他控件一样。",judge,对|错,对
+30,android-judge,"Android 中要访问网络,必须在AndroidManifest.xml中注册网络访问权限。",judge,对|错,对
+31,android-judge,"HttpURLConnection是抽象类,不能直接实例化对象,需要使用URL的openConnection()方法获得。",judge,对|错,对

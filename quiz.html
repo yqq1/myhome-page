@@ -15,8 +15,8 @@
       } catch {}
     })();
   </script>
-  <link rel="stylesheet" href="assets/quiz.css" />
-  <link rel="stylesheet" href="assets/theme.css" />
+  <link rel="stylesheet" href="assets/quiz.css?v=20260529" />
+  <link rel="stylesheet" href="assets/theme.css?v=20260529" />
 </head>
 <body>
   <main class="page">
@@ -68,6 +68,10 @@
           <button id="apply-limit" class="mode-button" type="button">应用题数</button>
           <button id="clear-limit" class="mode-button active" type="button">全部题目</button>
         </div>
+        <label class="practice-toggle">
+          <input id="hide-question-toggle" type="checkbox" />
+          <span>默写模式：隐藏题目</span>
+        </label>
         <div id="quiz-root" class="question-shell">
           <div class="empty-state">
             <p class="helper">题库载入后，这里会显示进度、题目内容、判题结果和最终得分。</p>
@@ -82,6 +86,6 @@
   </main>
 
   <script src="assets/theme.js"></script>
-  <script type="module" src="assets/quiz.js?v=20260528"></script>
+  <script type="module" src="assets/quiz.js?v=20260529"></script>
 </body>
 </html>
