@@ -225,6 +225,18 @@ html[data-theme="dark"] .result-box[data-state="wrong"] {
   border-color: rgba(248, 113, 113, 0.4);
 }
 
+html[data-theme="dark"] .option-item:has(input:checked) {
+  border-color: rgba(103, 194, 255, 0.78);
+  background:
+    linear-gradient(135deg, rgba(103, 194, 255, 0.18), rgba(242, 163, 200, 0.1)),
+    rgba(16, 23, 34, 0.96);
+  box-shadow: 0 0 0 4px rgba(103, 194, 255, 0.12);
+}
+
+html[data-theme="dark"] .option-item:has(input:checked) .option-copy strong {
+  color: #d7ebff;
+}
+
 html[data-theme="dark"] .answer-diff-wrong {
   background: rgba(248, 113, 113, 0.22);
   color: #fecaca;

@@ -54,5 +54,21 @@
     "badge": "判断",
     "file": "data/android-判断.csv",
     "questionCount": 31
-  }
+  },
+  {
+    "id": "毛概单选题",
+    "title": "毛概单选题",
+    "description": "毛概单选",
+    "badge": "单选",
+    "file": "data/毛概选择题.csv",
+    "questionCount": 50
+    },
+    {
+    "id": "毛概多选题",
+    "title": "毛概多选题",
+    "description": "毛概多选",
+    "badge": "多选",
+    "file": "data/毛概多选题.csv",
+    "questionCount": 25
+    }
 ]

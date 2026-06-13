@@ -11,6 +11,7 @@ import {
   parseCsv,
   shuffleArray
 } from "./quiz-data.js";
+import { bindQuizKeyboardShortcuts } from "./quiz-keyboard.js";
 
 const manifestUrl = "data/quiz-manifest.json";
 const setList = document.querySelector("#set-list");
@@ -18,6 +19,7 @@ const modeSwitch = document.querySelector("#mode-switch");
 const limitSwitch = document.querySelector("#limit-switch");
 const limitInput = document.querySelector("#limit-input");
 const hideQuestionToggle = document.querySelector("#hide-question-toggle");
+const page = document.querySelector(".page");
 const quizRoot = document.querySelector("#quiz-root");
 const quizSubtitle = document.querySelector("#quiz-subtitle");
 
@@ -46,6 +48,12 @@ async function init() {
   bindModeSwitch();
   bindLimitSwitch();
   bindPracticeOptions();
+  bindQuizKeyboardShortcuts({
+    nextQuestion,
+    selectOption: selectOptionByShortcut,
+    submitAnswer,
+    isAnswered: () => state.answered
+  });
   renderSetList();
   renderEmpty("先从左侧选择一个题库开始。");
 }
@@ -97,6 +105,7 @@ async function selectSet(setId) {
   state.answered = false;
   state.wrongQuestions = [];
 
+  syncQuizActiveState();
   syncActiveCard();
   syncLimitButtons();
   quizSubtitle.textContent = buildQuizSubtitle(setMeta.title, setMeta.description, questions.length);
@@ -324,6 +333,7 @@ function retryWrongQuestions() {
   state.score = 0;
   state.answered = false;
   state.wrongQuestions = [];
+  syncQuizActiveState();
   quizSubtitle.textContent = `重答错题 · 共 ${state.questions.length} 题`;
   renderQuestion();
 }
@@ -363,10 +373,24 @@ function resetToSetList() {
   state.score = 0;
   state.answered = false;
   state.wrongQuestions = [];
+  syncQuizActiveState();
   quizSubtitle.textContent = buildIdleSubtitle();
   syncActiveCard();
   syncLimitButtons();
   renderEmpty("先从左侧选择一个题库开始。");
+}
+
+function selectOptionByShortcut(optionIndex) {
+  const question = state.questions[state.index];
+  if (!question || state.answered || question.type === "short") return false;
+
+  const inputs = Array.from(document.querySelectorAll('input[name="answer-option"]'));
+  const input = inputs[optionIndex];
+  if (!input || input.disabled) return false;
+
+  input.checked = question.type === "multiple" ? !input.checked : true;
+  input.dispatchEvent(new Event("change", { bubbles: true }));
+  return true;
 }
 
 function collectUserAnswer(question) {
@@ -424,6 +448,8 @@ function syncLimitButtons() {
   document.querySelector("#clear-limit").classList.toggle("active", state.questionLimit === null);
   limitInput.value = "";
 }
+
+function syncQuizActiveState() { page.classList.toggle("quiz-active", Boolean(state.activeSetId || state.questions.length)); }
 
 function applyQuestionLimit(questions) {
   const range = getQuestionLimitRange(state.questionLimit, questions.length);
