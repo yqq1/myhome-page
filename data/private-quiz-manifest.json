@@ -1,0 +1,26 @@
+[
+  {
+    "id": "English",
+    "title": "英语翻译",
+    "description": "10个翻译句子",
+    "badge": "基础题库",
+    "file": "data/English.csv",
+    "questionCount": 10
+  },
+  {
+    "id": "听力第一章",
+    "title": "听力第一章",
+    "description": "听力第一章",
+    "badge": "听力",
+    "file": "data/听力第一章.csv",
+    "questionCount": 80
+  },
+  {
+    "id": "英语作文",
+    "title": "英语作文",
+    "description": "3篇作文",
+    "badge": "作文",
+    "file": "data/英语作文.csv",
+    "questionCount": 30
+  }
+]

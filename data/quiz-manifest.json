@@ -1,29 +1,5 @@
 [
   {
-    "id": "English",
-    "title": "英语翻译",
-    "description": "10个翻译句子",
-    "badge": "基础题库",
-    "file": "data/English.csv",
-    "questionCount": 10
-  },
-  {
-    "id": "听力第一章",
-    "title": "听力第一章",
-    "description": "听力第一章",
-    "badge": "听力",
-    "file": "data/听力第一章.csv",
-    "questionCount": 80
-  },
-  {
-    "id": "英语作文",
-    "title": "英语作文",
-    "description": "3篇作文",
-    "badge": "作文",
-    "file": "data/英语作文.csv",
-    "questionCount": 30
-  },
-  {
     "id": "计算机组成原理",
     "title": "计算机组成原理",
     "description": "选择题 110 题，填空题 40 题",
@@ -62,13 +38,37 @@
     "badge": "单选",
     "file": "data/毛概选择题.csv",
     "questionCount": 50
-    },
-    {
+  },
+  {
     "id": "毛概多选题",
     "title": "毛概多选题",
     "description": "毛概多选",
     "badge": "多选",
     "file": "data/毛概多选题.csv",
     "questionCount": 25
-    }
+  },
+  {
+    "id": "操作系统题目",
+    "title": "操作系统",
+    "description": "操作系统概述客观题",
+    "badge": "操作系统",
+    "file": "data/操作系统第一模块.csv",
+    "questionCount": 26
+  },
+  {
+    "id": "习概选择题",
+    "title": "习概选择题",
+    "description": "习概单选",
+    "badge": "单选",
+    "file": "data/习概选择题.csv",
+    "questionCount": 180
+  },
+  {
+    "id": "习概多选题",
+    "title": "习概多选题",
+    "description": "习概多选",
+    "badge": "多选",
+    "file": "data/习概多选题.csv",
+    "questionCount": 95
+  }
 ]

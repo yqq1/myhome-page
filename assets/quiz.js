@@ -12,8 +12,8 @@ import {
   shuffleArray
 } from "./quiz-data.js";
 import { bindQuizKeyboardShortcuts } from "./quiz-keyboard.js";
+import { loadQuizManifest } from "./quiz-manifest.js";
 
-const manifestUrl = "data/quiz-manifest.json";
 const setList = document.querySelector("#set-list");
 const modeSwitch = document.querySelector("#mode-switch");
 const limitSwitch = document.querySelector("#limit-switch");
@@ -33,6 +33,7 @@ const state = {
   randomMode: false,
   questionLimit: null,
   hideQuestion: false,
+  privateMode: false,
   wrongQuestions: []
 };
 
@@ -41,10 +42,9 @@ init().catch((error) => {
 });
 
 async function init() {
-  const response = await fetch(manifestUrl);
-  if (!response.ok) throw new Error("无法读取题库索引");
-
-  state.manifest = await response.json();
+  const manifestData = await loadQuizManifest();
+  state.manifest = manifestData.items;
+  state.privateMode = manifestData.privateMode;
   bindModeSwitch();
   bindLimitSwitch();
   bindPracticeOptions();
@@ -55,7 +55,7 @@ async function init() {
     isAnswered: () => state.answered
   });
   renderSetList();
-  renderEmpty("先从左侧选择一个题库开始。");
+  renderEmpty(buildIdleSubtitle());
 }
 
 function renderSetList() {
@@ -460,7 +460,7 @@ function applyQuestionLimit(questions) {
 function buildIdleSubtitle() {
   const limitLabel = formatQuestionLimitLabel(state.questionLimit);
   const modeLabel = state.randomMode ? "随机出题" : "顺序出题";
-  return `先从左侧选择一个题库开始。当前为${modeLabel}，${limitLabel}。`;
+  return `${state.privateMode ? "隐藏入口已开启。" : ""}先从左侧选择一个题库开始。当前为${modeLabel}，${limitLabel}。`;
 }
 
 function buildQuizSubtitle(title, description, total) {
