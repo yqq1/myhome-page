@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YQ | Notes</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260528" />
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("yq-theme");
+        const theme = savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      } catch {}
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/notes.css?v=20260629" />
+  <link rel="stylesheet" href="assets/theme.css?v=20260629" />
+</head>
+<body>
+  <main class="notes-page">
+    <header class="topbar notes-topbar" aria-label="笔记页导航">
+      <a class="brand" href="index.html" aria-label="返回主页">
+        <span class="brand-mark">YQ</span>
+        <span>YQ's Notes</span>
+      </a>
+      <nav class="nav" aria-label="笔记页主导航">
+        <a href="index.html">主页</a>
+        <a href="works.html">作品</a>
+        <a class="active" href="notes.html">笔记</a>
+        <a href="quiz.html">刷题</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle>暗色模式</button>
+    </header>
+
+    <section class="notes-shell" aria-label="笔记阅读区">
+      <aside class="blog-sidebar" aria-label="博客目录">
+        <div class="sidebar-title">
+          <span>▥</span>
+          <strong>博客目录</strong>
+        </div>
+        <nav id="category-list" class="category-list"></nav>
+      </aside>
+
+      <article class="article-panel" aria-live="polite">
+        <div class="article-progress" aria-hidden="true"><span id="read-progress"></span></div>
+        <div id="article-meta" class="article-meta"></div>
+        <h1 id="article-title">正在加载笔记</h1>
+        <div id="article-content" class="article-content">
+          <p class="article-loading">正在读取文章内容。</p>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" aria-label="本文目录">
+        <div class="toc-card">
+          <div class="toc-title">本文目录</div>
+          <nav id="toc-list" class="toc-list"></nav>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="assets/theme.js"></script>
+  <script src="assets/vendor/highlight/highlight.min.js"></script>
+  <script src="assets/notes.js?v=20260629"></script>
+</body>
+</html>

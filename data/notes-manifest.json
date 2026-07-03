@@ -1,0 +1,48 @@
+{
+  "categories": [
+    {
+      "id": "reverse-engineering",
+      "title": "逆向工程",
+      "articles": [
+        {
+          "id": "learn-reverse-analysis",
+          "title": "如何学习逆向分析技术？",
+          "date": "2025-09-29",
+          "views": 592,
+          "tags": ["逆向工程"],
+          "summary": "从一个简单的密码判断程序开始理解反编译阅读方式。",
+          "path": "data/notes/learn-reverse-analysis.html"
+        },
+        {
+            "id": "todolist-接口文档",
+            "title": "ToDoList 接口文档",
+            "date": "2026-06-30",
+            "views": 0,
+            "tags": [],
+            "summary": "test",
+            "path": "data/notes/todolist-接口文档.html"
+          }
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "人工智能",
+      "articles": []
+    },
+    {
+      "id": "cpp",
+      "title": "C&C++ 编程",
+      "articles": []
+    },
+    {
+      "id": "os",
+      "title": "操作系统",
+      "articles": []
+    },
+    {
+      "id": "security",
+      "title": "网络安全",
+      "articles": []
+    }
+  ]
+}

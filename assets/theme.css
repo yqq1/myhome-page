@@ -28,6 +28,25 @@ html[data-theme="dark"] {
   transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
 }
 
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 280ms ease,
+    border-color 280ms ease,
+    color 280ms ease,
+    box-shadow 280ms ease,
+    fill 280ms ease,
+    stroke 280ms ease;
+}
+
+html.theme-transitioning::view-transition-old(root),
+html.theme-transitioning::view-transition-new(root) {
+  animation-duration: 280ms;
+  animation-timing-function: ease;
+}
+
 .topbar {
   flex-wrap: wrap;
 }
@@ -286,6 +305,10 @@ html[data-theme="dark"] .section-heading p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after,
   .theme-toggle,
   .nav a,
   .project-link,

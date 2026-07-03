@@ -1,4 +1,5 @@
 const THEME_KEY = "yq-theme";
+let themeTransitionTimer = 0;
 
 initThemeToggle();
 
@@ -6,13 +7,32 @@ function initThemeToggle() {
   syncThemeButtons();
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
     button.addEventListener("click", () => {
-      applyTheme(getCurrentTheme() === "dark" ? "light" : "dark", true);
+      transitionTheme(getCurrentTheme() === "dark" ? "light" : "dark", true);
     });
   });
 }
 
 function getCurrentTheme() {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function transitionTheme(theme, persist) {
+  if (shouldReduceMotion()) {
+    applyTheme(theme, persist);
+    return;
+  }
+
+  document.documentElement.classList.add("theme-transitioning");
+  window.clearTimeout(themeTransitionTimer);
+
+  if (document.startViewTransition) {
+    const transition = document.startViewTransition(() => applyTheme(theme, persist));
+    transition.finished.finally(endThemeTransition);
+    return;
+  }
+
+  applyTheme(theme, persist);
+  themeTransitionTimer = window.setTimeout(endThemeTransition, 360);
 }
 
 function applyTheme(theme, persist) {
@@ -26,6 +46,14 @@ function applyTheme(theme, persist) {
   }
 
   syncThemeButtons();
+}
+
+function endThemeTransition() {
+  document.documentElement.classList.remove("theme-transitioning");
+}
+
+function shouldReduceMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 function syncThemeButtons() {
