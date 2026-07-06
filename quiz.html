@@ -15,8 +15,8 @@
       } catch {}
     })();
   </script>
-  <link rel="stylesheet" href="assets/quiz.css?v=20260612b" />
-  <link rel="stylesheet" href="assets/theme.css?v=20260612b" />
+  <link rel="stylesheet" href="assets/quiz.css?v=20260706b" />
+  <link rel="stylesheet" href="assets/theme.css?v=20260705a" />
 </head>
 <body>
   <main class="page">
@@ -49,7 +49,12 @@
             <h2 id="set-list-title">题库列表</h2>
             <p>支持多个本地 CSV 题库切换。</p>
           </div>
+          <div class="custom-import">
+            <label class="ghost-button custom-import-button" for="custom-import-input">导入CSV</label>
+            <input id="custom-import-input" class="custom-import-input" type="file" accept=".csv,text/csv" />
+          </div>
         </div>
+        <p id="custom-import-status" class="custom-import-status" aria-live="polite" hidden></p>
         <div id="set-list" class="set-list"></div>
       </section>
 
@@ -60,19 +65,29 @@
             <p id="quiz-subtitle">先从左侧选择一个题库开始。</p>
           </div>
         </div>
-        <div id="mode-switch" class="mode-switch" aria-label="出题模式">
-          <button class="mode-button active" type="button" data-mode="ordered">顺序出题</button>
-          <button class="mode-button" type="button" data-mode="random">随机出题</button>
-        </div>
-        <div id="limit-switch" class="mode-switch" aria-label="出题数量">
-          <input id="limit-input" class="limit-input" type="text" inputmode="numeric" autocomplete="off" placeholder="如 5 或 5-10" />
-          <button id="apply-limit" class="mode-button" type="button">应用题数</button>
-          <button id="clear-limit" class="mode-button active" type="button">全部题目</button>
-        </div>
-        <label class="practice-toggle">
-          <input id="hide-question-toggle" type="checkbox" />
-          <span>默写模式：隐藏题目</span>
-        </label>
+        <section class="practice-settings" aria-label="练习设置">
+          <button id="practice-settings-toggle" class="practice-settings-toggle" type="button" aria-expanded="false" aria-controls="practice-settings-panel">
+            <span>练习设置</span>
+            <strong id="practice-settings-summary" class="practice-settings-summary">顺序出题 · 全部题目 · 显示题目</strong>
+          </button>
+          <div id="practice-settings-panel" class="practice-settings-panel" aria-hidden="true" hidden>
+            <div class="practice-settings-content">
+              <div id="mode-switch" class="mode-switch" aria-label="出题模式">
+                <button class="mode-button active" type="button" data-mode="ordered">顺序出题</button>
+                <button class="mode-button" type="button" data-mode="random">随机出题</button>
+              </div>
+              <div id="limit-switch" class="mode-switch" aria-label="出题数量">
+                <input id="limit-input" class="limit-input" type="text" inputmode="numeric" autocomplete="off" placeholder="如 5 或 5-10" />
+                <button id="apply-limit" class="mode-button" type="button">应用题数</button>
+                <button id="clear-limit" class="mode-button active" type="button">全部题目</button>
+              </div>
+              <label class="practice-toggle">
+                <input id="hide-question-toggle" type="checkbox" />
+                <span>默写模式：隐藏题目</span>
+              </label>
+            </div>
+          </div>
+        </section>
         <div id="quiz-root" class="question-shell">
           <div class="empty-state">
             <p class="helper">题库载入后，这里会显示进度、题目内容、判题结果和最终得分。</p>
@@ -87,6 +102,6 @@
   </main>
 
   <script src="assets/theme.js"></script>
-  <script type="module" src="assets/quiz.js?v=20260619"></script>
+  <script type="module" src="assets/quiz.js?v=20260706a"></script>
 </body>
 </html>

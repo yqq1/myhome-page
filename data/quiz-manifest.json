@@ -1,11 +1,19 @@
 [
   {
-    "id": "计算机组成原理",
-    "title": "计算机组成原理",
-    "description": "选择题 110 题，填空题 40 题",
-    "badge": "计组",
-    "file": "data/计算机组成原理.csv",
-    "questionCount": 150
+    "id": "计组单选题",
+    "title": "计组单选题",
+    "description": "计算机组成原理单选 110 题",
+    "badge": "单选",
+    "file": "data/计组单选题.csv",
+    "questionCount": 110
+  },
+  {
+    "id": "计组填空题",
+    "title": "计组填空题",
+    "description": "计算机组成原理填空 39 题",
+    "badge": "填空",
+    "file": "data/计组填空题.csv",
+    "questionCount": 40
   },
   {
     "id": "android-single",

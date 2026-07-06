@@ -244,6 +244,48 @@ html[data-theme="dark"] .result-box[data-state="wrong"] {
   border-color: rgba(248, 113, 113, 0.4);
 }
 
+html[data-theme="dark"] .wrong-book {
+  background: rgba(103, 194, 255, 0.08);
+  border-color: rgba(103, 194, 255, 0.22);
+}
+
+html[data-theme="dark"] .wrong-book-item {
+  background: rgba(16, 23, 34, 0.92);
+  border-color: rgba(103, 194, 255, 0.18);
+}
+
+html[data-theme="dark"] .practice-settings {
+  background: rgba(16, 23, 34, 0.82);
+  border-color: rgba(103, 194, 255, 0.18);
+}
+
+html[data-theme="dark"] .practice-settings-toggle:hover,
+html[data-theme="dark"] .practice-settings-toggle:focus-visible {
+  background: rgba(103, 194, 255, 0.1);
+}
+
+html[data-theme="dark"] .favorite-set-card .set-badge,
+html[data-theme="dark"] .favorite-button {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.26);
+  color: #fcd58b;
+}
+
+html[data-theme="dark"] .favorite-button:hover,
+html[data-theme="dark"] .favorite-button:focus-visible,
+html[data-theme="dark"] .favorite-button.active {
+  background: rgba(245, 158, 11, 0.24);
+  border-color: rgba(245, 158, 11, 0.46);
+}
+
+html[data-theme="dark"] .custom-import-status[data-state="success"] {
+  color: #8ee6bc;
+}
+
+html[data-theme="dark"] .custom-import-status[data-state="error"] {
+  color: #fca5a5;
+}
+
 html[data-theme="dark"] .option-item:has(input:checked) {
   border-color: rgba(103, 194, 255, 0.78);
   background:
@@ -286,7 +328,9 @@ html[data-theme="dark"] .set-desc,
 html[data-theme="dark"] .helper,
 html[data-theme="dark"] .result-answer,
 html[data-theme="dark"] .progress-copy,
+html[data-theme="dark"] .practice-settings-summary,
 html[data-theme="dark"] .option-copy span,
+html[data-theme="dark"] .wrong-book p,
 html[data-theme="dark"] .contact-card p,
 html[data-theme="dark"] .project-card p,
 html[data-theme="dark"] .info-card p,

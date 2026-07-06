@@ -21,5 +21,8 @@ export function bindQuizKeyboardShortcuts({ isAnswered, nextQuestion, selectOpti
 }
 
 function isTypingTarget(target) {
-  return target instanceof HTMLElement && Boolean(target.closest("input, textarea, button, select, [contenteditable='true']"));
+  if (!(target instanceof HTMLElement)) return false;
+  const input = target.closest("input");
+  if (input?.matches('input[name="answer-option"][type="radio"], input[name="answer-option"][type="checkbox"]')) return false;
+  return Boolean(target.closest("input, textarea, button, select, [contenteditable='true']"));
 }
